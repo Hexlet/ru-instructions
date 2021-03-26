@@ -6,7 +6,7 @@
 * **Gradle** — инструмент для сборки Java-проектов.
 
 Установку можно выполнить с помощью пакетного менеджера:
-* [Chocolatey в Windows](#windows-chocolatey)
+* [WSL в Windows](#windows-wsl)
 * [Homebrew в macOS](#macos-homebrew)
 * [Менеджеры Linux](#менеджеры-linux)
 
@@ -17,27 +17,13 @@
 
 Вам также может понадобиться [IDE для Java](#java-ide).
 
-## Windows Chocolatey
+## Windows WSL
 
-Установка производится пакетным менеджером Chocolatey. Если он ещё не установлен, откройте [командную строку от имени администратора](https://www.howtogeek.com/194041/how-to-open-the-command-prompt-as-administrator-in-windows-8.1/) и выполните следующую команду:
+Мы рекомендуем работать в *nix-системах, так как они наиболее совместимы с языками программирования и софтом, который нужен для обучения на Hexlet.
 
-```shell
-C:\Windows\system32> @powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
-```
+Если вы работаете на Windows, установите [Windows Subsystem for Linux](https://docs.microsoft.com/ru-ru/windows/wsl/install-win10) (WSL). Это позволит получить все преимущества Linux без переустановки системы.
 
-Установка JDK:
-```shell
-C:\Windows\system32> choco install openjdk11
-...
-C:\Windows\system32> refreshenv
-```
-
-Установка Gradle:
-```shell
-C:\Windows\system32>choco install gradle
-```
-
-После этого можно закрыть командную строку и в следующий раз запускать её без администраторских прав.
+Далее воспользуйтесь [инструкцией для Ubuntu](#менеджеры-linux) для установки софта. 
 
 
 ## macOS Homebrew
