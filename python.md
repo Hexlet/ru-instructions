@@ -1,0 +1,1 @@
+Python уже установлен во многих системах по умолчанию. Если у вас его нет, то воспользуйтесь [официальной документацией](https://www.python.org/downloads/). А затем установите [Poetry](https://python-poetry.org/docs/#installation).
