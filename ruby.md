@@ -10,18 +10,10 @@
 
 Самый простой вариант установки Ruby — используя системный пакетный менеджер по инструкции на [на сайте Ruby](https://www.ruby-lang.org/en/documentation/installation/)
 
-
 ### Пакетный менеджер asdf
 
 Такой же простой и универсальный способ получать нужную версию многих популярных языков — это менеджер *asdf*. Чтобы начать с ним работу:
 * Установите менеджер по [инструкции на официальном сайте](https://asdf-vm.com/guide/getting-started.html#_3-install-asdf)
 * Установите Ruby через этот менеджер по [гайду](https://github.com/asdf-vm/asdf-ruby)
 
-Подробнее о менеджере asdf можно прочитать в нашем [гайде](https://guides.hexlet.io/version_managers/#%D1%83%D0%BD%D0%B8%D0%B2%D0%B5%D1%80%D1%81%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9-%D0%BC%D0%B5%D0%BD%D0%B5%D0%B4%D0%B6%D0%B5%D1%80).
-
-
-## Ruby IDE
-
-Существуют различные IDE, наиболее популярные из них:
-* [IntelliJ RubyMine](https://www.jetbrains.com/ruby)
-* [Visual Studio Code](https://code.visualstudio.com/)
+Подробнее о менеджере asdf можно прочитать в нашем [гайде](https://guides.hexlet.io/version_managers/).
