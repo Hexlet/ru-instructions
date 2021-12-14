@@ -22,7 +22,7 @@ brew install php
 
 ## Ubuntu, Debian
 
-Установка JDK:
+Установка PHP:
 
 ```shell
 sudo apt update
