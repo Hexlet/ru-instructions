@@ -17,16 +17,15 @@
 
 Установка производится пакетным менеджером Homebrew. Если он ещё не установлен, откройте терминал и выполните следующую команду:
 
-```shell
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
 Установка:
 
-```shell
+```bash
 # Java
-brew tap AdoptOpenJDK/openjdk
-brew install --cask adoptopenjdk16
+brew install openjdk@17
 
 # Сборщик проектов
 brew install gradle
@@ -36,13 +35,13 @@ brew install gradle
 
 Установка:
 
-```shell
+```bash
 sudo apt update
 sudo apt install -y software-properties-common
 
 # Java
 sudo add-apt-repository ppa:openjdk-r/ppa
-sudo apt install -y openjdk-16-jdk
+sudo apt install -y openjdk-17-jdk
 
 # Сборщик проектов
 sudo add-apt-repository ppa:cwchien/gradle
