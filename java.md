@@ -2,7 +2,7 @@
 
 Для работы с Java понадобятся:
 
-* **Java Development Kit (JDK)** — набор, включающий в себя среду исполнения *Java Runtime* и другие инструменты для разработки. В первую очередь — компиллятор;
+* **Java Development Kit (JDK)** — набор, включающий в себя среду исполнения *Java Runtime* и другие инструменты для разработки. В первую очередь — компилятор;
 * **Gradle** — инструмент для сборки Java-проектов.
 
 ## Windows
@@ -11,7 +11,7 @@
 
 Если вы работаете на Windows, установите [Windows Subsystem for Linux](https://docs.microsoft.com/ru-ru/windows/wsl/install-win10) (WSL). Это позволит получить все преимущества Linux без переустановки системы. Далее воспользуйтесь [инструкцией для Ubuntu](#ubuntu,-debian) для установки софта.
 
-Если такой возможности нет, то скачайте инсталятор [тут](https://adoptium.net/releases.html?variant=openjdk17&jvmVariant=hotspot) и выполните его. Затем установите Gradle по [инструкции официального сайта](https://gradle.org/install/)
+Если такой возможности нет, то скачайте инсталлятор [тут](https://adoptium.net/releases.html?variant=openjdk17&jvmVariant=hotspot) и выполните его. Затем установите Gradle по [инструкции официального сайта](https://gradle.org/install/)
 
 ## macOS Homebrew
 
