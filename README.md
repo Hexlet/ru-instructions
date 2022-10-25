@@ -9,6 +9,7 @@ Installation guides:
 * [Python](/python.md)
 * [Go](/go.md)
 * [PostgreSQL](/postgresql.md)
+* [TypeScript](/typescript.md)
 
 ---
 [![Hexlet Ltd. logo](https://raw.githubusercontent.com/Hexlet/assets/master/images/hexlet_logo128.png)](https://hexlet.io/?utm_source=github&utm_medium=link&utm_campaign=instructions)
