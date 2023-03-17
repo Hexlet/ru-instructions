@@ -8,9 +8,11 @@
   [гайд](https://guides.hexlet.io/ubuntu-linux-in-windows/).
 - Вы знаете, как запустить терминал, и можете выполнить команды в нём
 - Python уже не установлен в вашей системе по умолчанию, выполнив команду:
-```sh
+
+```bash
 python3 -V
 ```
+
 - Вы знакомы с основами Git
 
 ## Используя менеджер версий (рекомендованный)
@@ -19,7 +21,7 @@ python3 -V
   ["Что такое "Менеджер версий""](https://guides.hexlet.io/version_managers/)
 - Выполните команды:
 
-```sh
+```bash
 asdf plugin-add python https://github.com/asdf-community/asdf-python.git
 asdf install python3 latest
 ```
@@ -28,13 +30,13 @@ asdf install python3 latest
 
 ### MacOS (если установлен Homebrew)
 
-```sh
+```bash
 brew install python3
 ```
 
 ### Ubuntu Linux
 
-```sh
+```bash
 sudo apt install python3
 ```
 
