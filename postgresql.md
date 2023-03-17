@@ -12,13 +12,37 @@
 # Macos
 brew install postgresql
 
-# Ubuntu, Windows
+# Ubuntu
 sudo apt install postgresql
+
+# Windows Subsystem for Linux (WSL)
+sudo apt install postgresql postgresql-contrib
 ```
 
-Сразу после установки PostgreSQL автоматически запускается от имени вновь созданного пользователя _postgres_ в большинстве операционных систем. Этот пользователь понадобится нам дальше. Также будет создана база данных с именем _postgres_.
+Сразу после установки PostgreSQL автоматически запускается от имени вновь созданного пользователя _postgres_ в большинстве операционных систем, за исключением Windows Subsystem for Linux (WSL). Пользователь _postgres_ понадобится нам дальше. Также будет создана база данных с именем _postgres_.
 
-Теперь убедимся в том, что установка прошла правильно. Посмотрите из командной строки, запущен ли PostgreSQL:
+## Запуск PostgreSQL на Windows (WSL)
+
+В начале для созданного пользователя _postgres_ потребуется задать пароль. Сделать это можно с помощью команды:
+
+```sudo passwd postgres```
+
+Кроме того, в отличие от Linux и MacOS, в Windows (WSL) PostgreSQL автоматические не запускается. Исправить это помогают следующие команды:
+
+```bash
+# Проверяет текущее состояние базы данных, то есть показывает запущен ли PostgreSQL или нет
+sudo service postgresql status
+ 
+# Команда служит для запуска PostgreSQL
+sudo service postgresql start
+
+# Команда служит для остановки PostgreSQL
+sudo service postgresql stop
+```
+
+## Проверка правильности установки
+
+Теперь убедимся в том, что установка PostgreSQL прошла правильно. Посмотрим из командной строки, запущен ли PostgreSQL:
 
 ```bash
 ps aux | grep postgres
