@@ -10,20 +10,23 @@
 
 * Установите менеджер версий asdf. О том, как это сделать, мы писали в гайде ["Что такое "Менеджер версий""](https://guides.hexlet.io/ru/version-managers/)
 * Выполните команды:
-```
+
+```bash
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 asdf install nodejs latest
 ```
+
 ## Используя менеджер пакетов
 
 Пользователи MacOS, у которых установлен Homebrew, могут установить Node.js командой:
 
-```
+```bash
 brew install node
 ```
+
 Пользователи Ubuntu могут установить Node.js командой:
 
-```
+```bash
 curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash - &&\
 sudo apt-get install -y nodejs
 ```
@@ -45,23 +48,21 @@ sudo apt-get install -y nodejs
 добавьте */usr/local/lib/nodejs/node-v18.15.0-linux-x64/bin* в переменную `$PATH` (имя архива и директории 'node-...' может отличаться в зависимости от текущей актуальной версии node).
 Например, если у вас стоит Bash, то порядок действий будет следующий:
 
+```bash
+sudo mkdir -p /usr/local/lib/nodejs
+sudo tar -xJvf node-v18.15.0-linux-x64.tar.xz -C /usr/local/lib/nodejs
+echo 'export PATH=$PATH:/usr/local/lib/nodejs/node-v18.15.0-linux-x64/bin' >> $HOME/.profile
+source $HOME/.profile
 ```
- sudo mkdir -p /usr/local/lib/nodejs
- sudo tar -xJvf node-v18.15.0-linux-x64.tar.xz -C /usr/local/lib/nodejs 
-```
-Далее в любом редакторе открыть файл *~/.profile* и добавить следующую строку:
-```
-export PATH=/usr/local/lib/nodejs/node-v18.15.0-linux-x64/bin:$PATH
-```
-Если у вас стоит Zsh, то строку выше нужно добавить в файл *~/.zprofile*
 
 После того, как вы установили Node.js любым из
 вышеперечисленных методов, нужно перезапустить
 терминал. Проверить, успешно ли прошла установка можно запустив в терминале:
 
-```sh
+```bash
 # Вывод может отличаться, главное чтобы не было ошибок
 node -v
 v18.15.0
 ```
+
 Если команда возвращает ошибку, то на Linux и MacOS стоит проверить, добавлена ли директория *bin* в переменную окружения `$PATH`.
