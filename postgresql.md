@@ -31,18 +31,18 @@ sudo apt install postgresql postgresql-contrib
 
 ```bash
 # Проверяет текущее состояние базы данных, то есть показывает запущен ли PostgreSQL или нет
-sudo service postgresql status - проверяет текущее состояние базы данных, то есть показывает запущен ли PostgreSQL или нет.
+sudo service postgresql status
  
 # Команда служит для запуска PostgreSQL
-sudo service postgresql start - команда служит для *запуска* PostgreSQL.
+sudo service postgresql start
 
 # Команда служит для остановки PostgreSQL
-sudo service postgresql stop - команда служит для *остановки* PostgreSQL.
+sudo service postgresql stop
 ```
 
 ## Проверка правильности установки
 
-После установки PostgreSQL или после установки и запуска PostgreSQL в случае работы на Windows (WSL), убедимся в том, что установка прошла правильно. Посмотрите из командной строки, запущен ли PostgreSQL:
+Теперь убедимся в том, что установка PostgreSQL прошла правильно. Посмотрим из командной строки, запущен ли PostgreSQL:
 
 ```bash
 ps aux | grep postgres
