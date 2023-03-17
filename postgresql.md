@@ -27,7 +27,7 @@ sudo apt install postgresql postgresql-contrib
 
 ```sudo passwd postgres```
 
-Кроме того, в отличие от Linux и MacOS, в Windows (WSL) PostgreSQL автоматические не запускается. Исправить это помогают следующие команды:
+Кроме того, в отличие от Linux и MacOS, в Windows (WSL) PostgreSQL автоматически не запускается. Исправить это помогают следующие команды:
 
 ```bash
 # Проверяет текущее состояние базы данных, то есть показывает запущен ли PostgreSQL или нет
