@@ -1,6 +1,6 @@
 # Instructions
 
-Installation guides:
+Main installation guides:
 
 * [Java](/java.md)
 * [Node.js](/nodejs.md)
@@ -8,8 +8,11 @@ Installation guides:
 * [PHP](/php.md)
 * [Python](/python.md)
 * [Go](/go.md)
-* [PostgreSQL](/postgresql.md)
 * [TypeScript](/typescript.md)
+
+Additional guides:
+
+* [PostgreSQL](/postgresql.md)
 * [Vue 3 new project](/vue.md)
 
 ---
