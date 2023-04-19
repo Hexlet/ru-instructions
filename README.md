@@ -2,6 +2,7 @@
 
 Main installation guides:
 
+* [Git](/git.md)
 * [Java](/java.md)
 * [Node.js](/nodejs.md)
 * [Ruby](/ruby.md)
@@ -13,6 +14,7 @@ Main installation guides:
 Additional guides:
 
 * [PostgreSQL](/postgresql.md)
+* [.NET](/dotnet.md)
 * [Vue 3 new project](/vue.md)
 
 ---
