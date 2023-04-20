@@ -1,15 +1,20 @@
 # Instructions
 
-Installation guides:
+Main installation guides:
 
+* [Git](/git.md)
 * [Java](/java.md)
 * [Node.js](/nodejs.md)
 * [Ruby](/ruby.md)
 * [PHP](/php.md)
 * [Python](/python.md)
 * [Go](/go.md)
-* [PostgreSQL](/postgresql.md)
 * [TypeScript](/typescript.md)
+
+Additional guides:
+
+* [PostgreSQL](/postgresql.md)
+* [.NET](/dotnet.md)
 * [Vue 3 new project](/vue.md)
 * [DBeaver](/dbeaver.md)
 
