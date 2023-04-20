@@ -27,19 +27,27 @@
 
 2. Запустите исполняемый файл DBeaver
 
-## Debian-пакет
+## Linux
+В зависимости от выбранной версии DBeaver исполняемый файл может называться одним из следующих вариантов: dbeaver-le, dbeaver-ee, dbeaver-ue. В примере для запуска используется dbeaver-le
+
+### Debian-пакет
 
 Установка DBeaver с помощью Debian-пакета:
 1. Выполните команду `sudo dpkg -i dbeaver-<version>.deb`
-2. Выполните команду `dbeaver &`
+2. Выполните команду `dbeaver-le &`
 
-## RPM-пакет
+### RPM-пакет
 
 Установка DBeaver с помощью RPM-пакета:
 1. Выполните команду `sudo rpm -ivh dbeaver-<version>.rpm`
-2. Выполните команду `dbeaver &`
+2. Выполните команду `dbeaver-le &`
 
 ВАЖНО: Чтобы обновить существующую установку DBeaver используйте команду `sudo rpm -Uvh dbeaver-<version>.rpm`
+
+## Особенности установки в WSL
+
+В WSL, в Ubuntu 20.04, без дополнительной настройки не хватает библиотеки SWT
+Установка библиотеки: `sudo apt install libswt-gtk-4-java` 
 
 ## Автоматическое обновление
 
