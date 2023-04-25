@@ -13,11 +13,14 @@ Main installation guides:
 
 Additional guides:
 
+
 - [PostgreSQL](/postgresql.md)
 - [.NET](/dotnet.md)
 - [Vue 3 new project](/vue.md)
 - [DBeaver](/dbeaver.md)
+- [Docker](/docker.md)
 - [Redis](/redis.md)
+
 
 ---
 
