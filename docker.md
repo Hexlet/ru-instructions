@@ -10,9 +10,74 @@
 - Вы знаете, как запустить терминал, и можете выполнить команды в нём
 
 ----
-Процесс установки Docker отличается в зависимости операционной системы:
+Процесс установки Docker отличается в зависимости операционной системы и от типа реализации Docker:
+Docker Engine и Docker Desktop.
+
+Docker Engine - это пакет программного обеспечения, который включает в себя все необходимые компоненты
+для работы Docker на системе Linux. Docker Engine предоставляет возможность запускать контейнеры,
+управлять ими и создавать собственные образы Docker.
+
+Docker Desktop - это приложение для ПК, которое включает в себя стандартный Docker Engine,
+графический интерфейс и интеграцию со средой разработки.
+
+## Установка Docker Engine (на примере Linux Ubuntu)
+<details><summary style="font-size:140%">Linux</summary>
+
+Будем рассматривать процесс установки на примере дистрибутива Linux Ubuntu
+(установка прочих [дистрибутивов Linux](https://docs.docker.com/engine/install/#server)).
+
+Чтобы установить Docker Engine, вам потребуется 64-разрядная версия одной из
+[следующих](https://docs.docker.com/engine/install/ubuntu/#os-requirements) версий Ubuntu.
+Docker Engine совместим с архитектурами x86_64 (или amd64), armhf, arm64 и s390x.
+
+### Установка Docker Engine
+1. Настройте репозиторий:
+   1. Обновите apt:
+       ```bash
+       sudo apt-get update
+       ```
+   2. Установите пакеты, которые необходимы для работы пакетного менеджера apt по протоколу HTTPS:
+       ```bash
+       sudo apt-get install \
+        ca-certificates \
+        curl \
+        gnupg
+       ```
+   3. Добавьте официальный GPG-ключ Docker:
+       ```bash
+       sudo install -m 0755 -d /etc/apt/keyrings
+       curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+       sudo chmod a+r /etc/apt/keyrings/docker.gpg
+       ```    
+   4. Добавьте репозиторий:
+       ```bash
+       echo \
+        "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+        "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+        sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+       ```
+2. Установите Docker Engine следующим образом:
+   1. Обновите apt:
+      ```bash
+      sudo apt-get update
+      ```
+   2. Установите последнюю версию Docker Engine и Docker-compose:
+      ```bash
+      sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+      ```
+3. Чтобы использовать утилиту docker, необходимо добавить ваше имя пользователя в группу Docker. Для этого
+введите в терминале команду:
+    ```bash
+    sudo usermod -aG docker ${user}
+    ```
+    где **user** это имя пользователя.
 
 
+----
+</details>
+
+
+## Установка Docker Desktop
 <details><summary style="font-size:140%">Windows</summary>
 
 Ваш компьютер с Windows должен соответствовать следующим [требованиям](https://docs.docker.com/desktop/install/windows-install/#system-requirements)
@@ -131,91 +196,6 @@
 
 ----
 
-</details>
-
-
-<details><summary style="font-size:140%">Linux</summary>
-
-Будем рассматривать процесс установки на примере дистрибутива Linux Ubuntu
-(установка прочих [дистрибутивов Linux](https://docs.docker.com/desktop/install/linux-install/#supported-platforms)).
-
-Для успешной установки необходимо осуществить следующие подготовительные шаги:
-* Ваш компьютер с Linux должен соответствовать следующим [требованиям](https://docs.docker.com/desktop/install/linux-install/#system-requirements)
-* Иметь 64-битную версию Ubuntu Jammy Jellyfish 22.04 (LTS) или Ubuntu Impish Indri 21.10. Docker Desktop поддерживается
-архитектурой ```x86_64``` (или ```amd64```).
-* Для сред рабочего стола, отличных от Gnome, ```gnome-terminal``` необходимо установить: 
-    ```bash
-    sudo apt install gnome-terminal
-    ```
-* Удалить бета-версии Docker:
-    ```bash
-    sudo apt remove docker-desktop
-    ```
-    Для полной очистки удалите файлы конфигурации и данных по адресу ```$HOME/.docker/desktop```,
-    символическую ссылку по адресу ```/usr/local/bin/com.docker.cli``` и очистите оставшиеся служебные файлы systemd
-    следующими командами:
-    ```bash
-    rm -r $HOME/.docker/desktop
-    sudo rm /usr/local/bin/com.docker.cli
-    sudo apt purge docker-desktop
-    ```
-
-### Установка Docker Desktop
-1. Настройте репозиторий:
-   1. Обновите apt:
-       ```bash
-       sudo apt-get update
-       ```
-   2. Установите пакеты, которые необходимы для работы пакетного менеджера apt по протоколу HTTPS:
-       ```bash
-       sudo apt-get install \
-        ca-certificates \
-        curl \
-        gnupg
-       ```
-   3. Добавьте официальный GPG-ключ Docker:
-       ```bash
-       sudo install -m 0755 -d /etc/apt/keyrings
-       curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-       sudo chmod a+r /etc/apt/keyrings/docker.gpg
-       ```    
-   4. Добавьте репозиторий:
-       ```bash
-       echo \
-        "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-        "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
-        sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-       ```
-2. Скачайте актуальный пакет с официальной страницы [Docker](https://docs.docker.com/desktop/install/ubuntu/)
-3. Установите пакет следующим образом:
-   1. Обновите apt:
-      ```bash
-      sudo apt-get update
-      ```
-   2. Установите пакет:
-      ```bash
-      sudo apt-get install ./docker-desktop-<version>-<arch>.deb
-      ```
-      где **version** и **arch** подставляются в соответствии со скачанным пакетом. В процессе установки может
-   возникнуть ошибка, которую игнорируем:
-      ```bash
-      N: Download is performed unsandboxed as root, as file '/home/user/Downloads/docker-desktop.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
-      ```
-4. Чтобы использовать утилиту docker, необходимо добавить ваше имя пользователя в группу Docker. Для этого
-введите в терминале команду:
-    ```bash
-    sudo usermod -aG docker ${user}
-    ```
-    где **user** это имя пользователя.
-5. Чтобы запустить Docker Desktop, выполните поиск Docker Desktop в меню **Приложения** и откройте его.
-При этом запускается значок меню Docker и открывается панель мониторинга Docker, сообщающая о состоянии рабочего стола Docker.
-
-    Или откройте терминал и запустите:
-    ```bash
-    systemctl --user start docker-desktop
-    ```
-
-----
 </details>
 
 По [ссылке](https://docs.docker.com/desktop/troubleshoot/overview/) описываются распространенные проблемы и возможные обходные пути.
