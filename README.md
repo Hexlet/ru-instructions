@@ -2,14 +2,14 @@
 
 Main installation guides:
 
-* [Git](/git.md)
-* [Java](/java.md)
-* [Node.js](/nodejs.md)
-* [Ruby](/ruby.md)
-* [PHP](/php.md)
-* [Python](/python.md)
-* [Go](/go.md)
-* [TypeScript](/typescript.md)
+- [Git](/git.md)
+- [Java](/java.md)
+- [Node.js](/nodejs.md)
+- [Ruby](/ruby.md)
+- [PHP](/php.md)
+- [Python](/python.md)
+- [Go](/go.md)
+- [TypeScript](/typescript.md)
 
 Additional guides:
 
