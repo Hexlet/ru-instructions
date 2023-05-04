@@ -13,11 +13,11 @@ Main installation guides:
 
 Additional guides:
 
-* [PostgreSQL](/postgresql.md)
-* [.NET](/dotnet.md)
-* [Vue 3 new project](/vue.md)
-* [DBeaver](/dbeaver.md)
-* [Ansible](/ansible.md)
+- [PostgreSQL](/postgresql.md)
+- [.NET](/dotnet.md)
+- [Vue 3 new project](/vue.md)
+- [DBeaver](/dbeaver.md)
+- [Ansible](/ansible.md)
 
 ---
 [![Hexlet Ltd. logo](https://raw.githubusercontent.com/Hexlet/assets/master/images/hexlet_logo128.png)](https://hexlet.io/?utm_source=github&utm_medium=link&utm_campaign=instructions)
