@@ -81,7 +81,7 @@ go version go1.19 linux/amd64
 пакеты.
 
 - Если Вы используете Linux, WSL или MacOS, то добавьте следующие строчки
-  в файл *~/.bashrc* (или или в *~/.zshrc*, если используете Zsh)
+  в файл *~/.bashrc* (или в *~/.zshrc*, если используете Zsh)
 
 ```sh
 export PATH=$PATH:$GOPATH/bin
