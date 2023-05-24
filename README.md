@@ -1,6 +1,6 @@
 # Инструкции
 
-Main installation guides:
+Основные руководства по установке:
 
 - [Git](/git.md)
 - [Java](/java.md)
@@ -11,7 +11,7 @@ Main installation guides:
 - [Go](/go.md)
 - [TypeScript](/typescript.md)
 
-Additional guides:
+Дополнительные руководства:
 
 - [PostgreSQL](/postgresql.md)
 - [.NET](/dotnet.md)
