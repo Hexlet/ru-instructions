@@ -1,4 +1,4 @@
-# Instructions
+# Инструкции
 
 Main installation guides:
 
