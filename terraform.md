@@ -58,31 +58,12 @@ terraform -v
 Установка:
 
 ```bash
-asdf plugin-add boundary https://github.com/asdf-community/asdf-hashicorp.git
-asdf plugin-add consul https://github.com/asdf-community/asdf-hashicorp.git
-asdf plugin-add levant https://github.com/asdf-community/asdf-hashicorp.git
-asdf plugin-add nomad https://github.com/asdf-community/asdf-hashicorp.git
-asdf plugin-add packer https://github.com/asdf-community/asdf-hashicorp.git
-asdf plugin-add sentinel https://github.com/asdf-community/asdf-hashicorp.git
-asdf plugin-add serf https://github.com/asdf-community/asdf-hashicorp.git
 asdf plugin-add terraform https://github.com/asdf-community/asdf-hashicorp.git
-asdf plugin-add terraform-ls https://github.com/asdf-community/asdf-hashicorp.git
-asdf plugin-add tfc-agent https://github.com/asdf-community/asdf-hashicorp.git
-asdf plugin-add vault https://github.com/asdf-community/asdf-hashicorp.git
-asdf plugin-add waypoint https://github.com/asdf-community/asdf-hashicorp.git
 ```
-
+Ссылка на [плагин](https://github.com/asdf-community/asdf-hashicorp)
 Использование:
 
 Посмотрите [asdf](https://asdf-vm.com/guide/getting-started.html) для получения инструкций о том, как устанавливать версии и управлять ими.
-
-Параметры переменной окружения:
-
-- ASDF_HASHICORP_SKIP_VERIFY: пропустить проверку контрольных сумм и подписей.
-- ASDF_HASHICORP_OVERWRITE_ARCH: принудительно заставьте плагин использовать указанную архитектуру процессора, а не автоматически определяемое значение. Полезно, например, для того, чтобы позволить пользователям Mac M1 устанавливать двоичные файлы ```amd64```, когда двоичный файл ```arm64``` недоступен.
-- ASDF_HASHICORP_OVERWRITE_ARCH_: аналогично предыдущему переопределению, как например для каждого конкретного инструмента.
- ASDF_HASHICORP_OVERWRITE_ARCH_TERRAFORM: Работает с ASDF_HASHICORP_OVERWRITE_ARCH, и переопределения, специфичные для конкретного инструмента, имеют приоритет.
-- ASDF_HASHICORP_TERRAFORM_VERSION_FILE: Какой ```.tf``` файл следует проверить на наличие ограничений версии при использовании параметра ```legacy_version_file в ~/.usdfrc.``` По умолчанию используется значение ```main.tf```
 
 ## Windows
 
