@@ -58,8 +58,8 @@ brew install gradle
     ```bash
     ## Устанавливаем Gradle
     asdf plugin-add gradle https://github.com/rfrancis/asdf-gradle.git
-    asdf install gradle 8.2
-    asdf global gradle 8.2
+    asdf install gradle 8.3
+    asdf global gradle 8.3
     ```
 
 ## Используя пакеты с официального сайта
