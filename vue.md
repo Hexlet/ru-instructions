@@ -8,7 +8,7 @@
 node -v
 ```
 
-Если Node.js установлен, то в терминале будет результат вида "v16.17.1", версия может отличаться. Если же появляется ошибка "command not found", то нужно устновить Node.js — [инструкция по установке](https://github.com/Hexlet/ru-instructions/blob/main/nodejs.md).
+Если Node.js установлен, то в терминале будет результат вида "v16.17.1", версия может отличаться. Если же появляется ошибка "command not found", то нужно установить Node.js — [инструкция по установке](https://github.com/Hexlet/ru-instructions/blob/main/nodejs.md).
 
 ## Создание проекта
 
