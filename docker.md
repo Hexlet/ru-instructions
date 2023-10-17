@@ -110,7 +110,7 @@ Docker Engine совместим с архитектурами x86_64 (или am
     ```bash
     Start-Process 'Docker Desktop Installer.exe' -Wait install
     ```
-    Если испольузется командная строка Windows:
+    Если используется командная строка Windows:
     ```bash
     start /w "" "Docker Desktop Installer.exe" install
     ```
