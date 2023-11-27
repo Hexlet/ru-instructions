@@ -24,7 +24,7 @@ python3 -V
 
 ```bash
 asdf plugin-add python https://github.com/asdf-community/asdf-python.git
-asdf install python3 latest
+asdf install python latest
 ```
 
 ## Используя менеджер пакетов
