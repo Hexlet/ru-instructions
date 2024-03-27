@@ -85,3 +85,27 @@ ssh-add ~/.ssh/id_ed25519
     ssh -T git@github.com
     Hi tirion! You've successfully authenticated, but GitHub does not provide shell access.
     ```
+
+## Возможные проблемы
+
+### Github просит логин и пароль
+
+```bash
+remote: Support for password authentication was removed on August 13, 2021.
+remote: Please see https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#cloning-with-https-urls for information on currently recommended modes of authentication.
+fatal: Authentication failed for 'https://github.com/tirion/hexlet-git.git/'
+```
+
+Проверьте, что в в репозитории стоит ссылка на SSH url
+
+```bash
+git remote -v
+origin	git@github.com:<username>/<repo>.git (fetch)
+origin	git@github.com:<username>/<repo>.git (push)
+```
+
+Если это не так, то ссылку нужно обновить 
+
+```bash
+git remote set-url origin git@github.com:<username>/<repo>.git
+```
