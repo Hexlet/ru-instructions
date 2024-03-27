@@ -78,3 +78,10 @@ ssh-add ~/.ssh/id_ed25519
     ```
 
 1. [Добавьте](https://github.com/settings/keys) ssh-ключ в аккаунт GitHub. При добавлении вас попросят назвать ключ. Напишите что-нибудь в стиле *home*.
+
+1. Проверьте, что подключение работает
+
+    ```bash
+    ssh -T git@github.com
+    Hi tirion! You've successfully authenticated, but GitHub does not provide shell access.
+    ```
