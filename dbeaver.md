@@ -4,8 +4,8 @@
 
 Ссылки для скачивания дистрибутивов:
 
-* [GitHub DBeaver](https://github.com/dbeaver/dbeaver/releases)
-* [Сайт проекта](https://dbeaver.com/download/)
+* [Сайт проекта](https://dbeaver.io/)
+* [Страница загрузки](https://dbeaver.io/download/)
 
 ## Установщик для Windows или MacOS (рекомендованный способ)
 
