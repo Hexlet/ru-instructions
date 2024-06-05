@@ -65,6 +65,20 @@ asdf plugin-add terraform https://github.com/asdf-community/asdf-hashicorp.git
 
 Посмотрите [asdf](https://asdf-vm.com/guide/getting-started.html) для получения инструкций о том, как устанавливать версии и управлять ими.
 
+## Менеджер версий tenv
+
+tenv - универсальный менеджер для управления версиями OpenTofu, Terraform, Terragrunt и Atmos. tenv заточен под
+экосистему Terraform и умеет сам находить и устанавливать подходящую версию на основании исходного кода. 
+Менеджер доступен для всех операционных систем и во множестве пакетных менеджеров (choco, brew, nix, apk, yay, aur). 
+Подробная инструкция по установке доступна в [официальном репозитории](https://github.com/tofuutils/tenv).
+
+Для установки Terraform через tenv необходимо перейти в папку с кодом, и выполнить следующую команду:
+
+```shell
+tenv tf install
+```
+
+
 ## Windows
 
 Перейдите по ссылке и [скачайте](https://developer.hashicorp.com/terraform/downloads) нужную вам версию
