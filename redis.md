@@ -100,7 +100,7 @@ make install
 Наконец, вы также можете установить Redis через Docker командой:
 
 ```bash
-docker run --name local-redis -d redis
+docker run --name local-redis -d redis/redis-stack-server
 ```
 
 ## Подключение
