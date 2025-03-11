@@ -96,7 +96,7 @@ remote: Please see https://docs.github.com/en/get-started/getting-started-with-g
 fatal: Authentication failed for 'https://github.com/tirion/hexlet-git.git/'
 ```
 
-Проверьте, что в в репозитории стоит ссылка на SSH url
+Проверьте, что в репозитории стоит ссылка на SSH url
 
 ```bash
 git remote -v
