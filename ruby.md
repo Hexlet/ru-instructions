@@ -12,4 +12,4 @@
 * Установите менеджер по [инструкции на официальном сайте](https://asdf-vm.com/guide/getting-started.html#_3-install-asdf)
 * Установите Ruby через этот менеджер по [гайду](https://github.com/asdf-vm/asdf-ruby)
 
-Подробнее о менеджере asdf можно прочитать в нашем [гайде](https://guides.hexlet.io/version_managers/).
+Подробнее о менеджере asdf можно прочитать в нашем [гайде](https://ru.hexlet.io/blog/posts/version-managers/).
