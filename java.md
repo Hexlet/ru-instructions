@@ -26,7 +26,7 @@
 
 ```bash
 # Установка JDK
-brew install openjdk@21
+brew install openjdk@21.0.2
 
 # Установка сборщика проектов Gradle
 brew install gradle
@@ -44,8 +44,8 @@ brew install gradle
     ```bash
     ## Устанавливаем JDK
     asdf plugin-add java https://github.com/halcyon/asdf-java.git
-    asdf install java openjdk-21
-    asdf global java openjdk-21
+    asdf install java openjdk-21.0.2
+    asdf global java openjdk-21.0.2
 
     ## Устанавливаем переменную окружения JAVA_HOME
     . ~/.asdf/plugins/java/set-java-home.bash
@@ -71,7 +71,7 @@ brew install gradle
 ```bash
 # Из директории, куда скачали архив
 mkdir /usr/lib/jvm
-tar -zxf openjdk-20*_bin.tar.gz -С /usr/lib/jvm
+tar -zxf openjdk-21.0.2_bin.tar.gz -С /usr/lib/jvm
 ## Имя конечной директории может отличаться, в зависимости от версии
 echo 'export JAVA_HOME=/usr/lib/jvm/jdk-21.0.2' >> $HOME/.bashrc
 echo 'export PATH=$PATH:/usr/lib/jvm/jdk-21.0.2/bin' >> $HOME/.bashrc
