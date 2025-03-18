@@ -6,7 +6,7 @@
 - Вы используете операционную систему, удобную для разработки (например Ubuntu,
   MacOS). Владельцам Windows мы рекомендуем настроить Windows Subsystem for
   Linux (WSL). О том, как это сделать мы написали
-  [гайд](https://guides.hexlet.io/ubuntu-linux-in-windows/).
+  [гайд](https://ru.hexlet.io/blog/posts/ubuntu-linux-in-windows/).
 - Вы знаете, как запустить терминал, и можете выполнить команды в нём
 
 ----
@@ -48,7 +48,7 @@ Docker Engine совместим с архитектурами x86_64 (или am
        sudo install -m 0755 -d /etc/apt/keyrings
        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
        sudo chmod a+r /etc/apt/keyrings/docker.gpg
-       ```    
+       ```
    4. Добавьте репозиторий:
        ```bash
        echo \
@@ -134,7 +134,7 @@ Docker Engine совместим с архитектурами x86_64 (или am
      "enhancedContainerIsolation": {"value": true, "locked": false}}'```
        </details>
 
-    
+
 3. Если учетная запись администратора отличается от вашей учетной записи пользователя,
 необходимо добавить пользователя в группу docker-users:
     ```bash
@@ -176,7 +176,7 @@ Docker Engine совместим с архитектурами x86_64 (или am
     **install** выполнение команды может занять несколько минут.
 
     <details><summary>Команда install может принимать дополнительные флаги:</summary>
-    
+
     * ```--quiet```: подавляет вывод информации при запуске установщика
       * ```--accept-license```: принимает соглашение об обслуживании подписки Docker сейчас,
       вместо того, чтобы требовать его принятия при первом запуске приложения.

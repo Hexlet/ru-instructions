@@ -5,14 +5,14 @@
 - Вы используете операционную систему, удобную для разработки (например Ubuntu,
   MacOS). Владельцам Windows мы рекомендуем настроить Windows Subsystem for
   Linux (WSL). О том, как это сделать мы написали
-  [гайд](https://guides.hexlet.io/ubuntu-linux-in-windows/).
+  [гайд](https://ru.hexlet.io/blog/posts/ubuntu-linux-in-windows/).
 - Вы знаете, как запустить терминал, и можете выполнить команды в нём
 - Вы знакомы с основами Git
 
 ## Используя менеджер версий (рекомендованный)
 
 - Установите менеджер версий asdf. О том, как это сделать, мы писали в гайде
-  ["Что такое "Менеджер версий""](https://guides.hexlet.io/version_managers/)
+  ["Что такое "Менеджер версий""](https://ru.hexlet.io/blog/posts/version-managers)
 - Выполните команды:
 
 ```sh

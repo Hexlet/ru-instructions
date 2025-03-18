@@ -2,7 +2,7 @@
 
 ## Подготовка Windows
 
-Для работы с PostgreSQL в Windows вам нужно [включить подсистему Ubuntu](https://guides.hexlet.io/ru/ubuntu-linux-in-windows/).
+Для работы с PostgreSQL в Windows вам нужно [включить подсистему Ubuntu](https://ru.hexlet.io/blog/posts/ubuntu-linux-in-windows).
 
 ## Установка
 
