@@ -14,10 +14,7 @@ sudo apt install httpie
 ## Установка HTTPie на Linux (Arch, Manjaro, EndeavourOS и др.)
 
 ```bash
-curl -SsL https://packages.httpie.io/deb/KEY.gpg | sudo gpg --dearmor -o /usr/share/pacman/keyrings/httpie.gpg
-echo "deb [arch=amd64 signed-by=/usr/share/pacman/keyrings/httpie.gpg] https://packages.httpie.io/deb ./" | sudo tee /etc/apt/sources.list.d/httpie.list > /dev/null
-sudo pacman -Sy
-sudo pacman -S httpie
+sudo pacman -Syu httpie
 ```
 
 ## Установка HTTPie на macOS
