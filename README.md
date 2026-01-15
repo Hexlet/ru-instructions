@@ -13,6 +13,7 @@
 
 Дополнительные руководства:
 
+- [Kubernetes](/kubernetes.md)
 - [PostgreSQL](/postgresql.md)
 - [.NET](/dotnet.md)
 - [Vue 3 new project](/vue.md)
