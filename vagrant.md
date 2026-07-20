@@ -137,10 +137,7 @@ Vagrant.configure('2') do |config|
 end
 ```
 
-Доступные зеркала боксов (есть образы для VirtualBox, включая `ubuntu/*`):
-
-- `https://vagrant.elab.pro`
-- `https://vagrant-hub.ru`
+Зеркало `https://vagrant.elab.pro` из примера содержит образы для VirtualBox, включая `ubuntu/*`.
 
 ### Зеркало для установщика Vagrant
 
