@@ -146,11 +146,6 @@ end
 - `https://hashicorp-releases.yandexcloud.net/vagrant/`
 - `https://hashicorp-releases.mcs.mail.ru/vagrant/`
 
-### VPN
-
-Универсальная альтернатива зеркалам — VPN с не-российским IP. См.
-[hexlet-unblock](https://github.com/Hexlet/hexlet-unblock#vpn).
-
 > ⚠️ Используйте только доверенные зеркала: скачанный образ виртуальной машины исполняется
 > у вас на компьютере, скомпрометированный бокс небезопасен.
 
