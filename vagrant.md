@@ -87,6 +87,7 @@ brew install --cask vagrant
   ```bash
   brew install --cask utm
   vagrant plugin install vagrant_utm
+  vagrant init utm/bookworm
   vagrant up --provider=utm
   ```
 
@@ -105,8 +106,8 @@ brew install --cask vagrant
 - **Parallels** (платный, наиболее стабильный вариант) + плагин
   [`vagrant-parallels`](https://parallels.github.io/vagrant-parallels/).
 
-> На Apple Silicon работают только **ARM64-боксы**. x86-боксы из учебных материалов
-> (например `ubuntu/focal64`) нужно заменять на arm64-аналоги — см. раздел
+> На Apple Silicon на практике используются **ARM64-боксы**. x86-боксы из учебных
+> материалов (например `ubuntu/focal64`) лучше заменять на arm64-аналоги — см. раздел
 > [«Боксы под Apple Silicon»](#боксы-под-apple-silicon).
 
 ## Проверка установки
@@ -151,8 +152,10 @@ end
 
 ## Боксы под Apple Silicon
 
-На Apple Silicon (и любой ARM-архитектуре) работают только **ARM64-боксы**. Если в задании
-указан x86-бокс (например `ubuntu/focal64`), замените его на arm64-аналог. Например:
+На Apple Silicon (и любой ARM-архитектуре) на практике используются **ARM64-боксы**.
+x86_64-боксы технически можно запустить через эмуляцию (UTM и QEMU это умеют), но она
+работает заметно медленнее, поэтому если в задании указан x86-бокс (например
+`ubuntu/focal64`), лучше заменить его на arm64-аналог. Например:
 
 - `utm/bookworm` — Debian 12 (для провайдера UTM)
 - `bento/ubuntu-22.04-arm64`
