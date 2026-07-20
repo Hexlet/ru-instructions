@@ -21,6 +21,7 @@
 - [DBeaver](/dbeaver.md)
 - [Ansible](/ansible.md)
 - [Terraform](/terraform.md)
+- [Vagrant](/vagrant.md)
 - [Tmux](/tmux.md)
 
 ---
