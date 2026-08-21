@@ -1,7 +1,6 @@
 # Установка Terraform
 
-Перед установкой нужно установить [vpn](https://github.com/Hexlet/hexlet-unblock#vpn)
-Чтобы заработал Terraform Cloud
+Перед установкой понадобится VPN — без него не работает Terraform Cloud.
 
 ## Ubuntu
 
