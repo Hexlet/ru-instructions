@@ -128,7 +128,7 @@ Docker Engine совместим с архитектурами x86_64 (или am
    * ```--installation-dir=<path>```: изменяет место установки по умолчанию *( C:\Program Files\Docker\Docker)*
    * ```--admin-settings```: автоматически создает ```admin-settings.json``` файл, который администраторы используют
    для управления определенными настройками Docker Desktop на клиентских компьютерах в своей организации.
-   Дополнительные сведения см. в разделе [Управление настройками](https://docs.docker.com/desktop/hardened-desktop/settings-management/) .
+   Дополнительные сведения см. в разделе [Управление настройками](https://docs.docker.com/enterprise/security/hardened-desktop/settings-management/) .
      * Он должен использоваться вместе с ```--allowed-org=<org name>``` флагом.
      * Например:```--allowed-org=<org name> --admin-settings='{"configurationFileVersion": 2,
      "enhancedContainerIsolation": {"value": true, "locked": false}}'```
@@ -188,7 +188,7 @@ Docker Engine совместим с архитектурами x86_64 (или am
       * ```--installation-dir=<path>```: изменяет место установки по умолчанию *( C:\Program Files\Docker\Docker)*
       * ```--admin-settings```: автоматически создает ```admin-settings.json``` файл, который администраторы используют
       для управления определенными настройками Docker Desktop на клиентских компьютерах в своей организации.
-      Дополнительные сведения см. в разделе [Управление настройками](https://docs.docker.com/desktop/hardened-desktop/settings-management/) .
+      Дополнительные сведения см. в разделе [Управление настройками](https://docs.docker.com/enterprise/security/hardened-desktop/settings-management/) .
         * Он должен использоваться вместе с ```--allowed-org=<org name>``` флагом.
         * Например:```--allowed-org=<org name> --admin-settings='{"configurationFileVersion": 2,
         "enhancedContainerIsolation": {"value": true, "locked": false}}'```
