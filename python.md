@@ -23,7 +23,7 @@ python3 -V
 - Выполните команды:
 
 ```bash
-asdf plugin-add python https://github.com/asdf-community/asdf-python.git
+asdf plugin add python https://github.com/asdf-community/asdf-python.git
 asdf install python latest
 ```
 

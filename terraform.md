@@ -57,7 +57,7 @@ terraform -v
 Установка:
 
 ```bash
-asdf plugin-add terraform https://github.com/asdf-community/asdf-hashicorp.git
+asdf plugin add terraform https://github.com/asdf-community/asdf-hashicorp.git
 ```
 Ссылка на [плагин](https://github.com/asdf-community/asdf-hashicorp)
 Использование:
