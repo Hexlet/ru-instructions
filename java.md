@@ -71,9 +71,9 @@ scoop install gradle
 
     ```bash
     ## Устанавливаем JDK
-    asdf plugin-add java https://github.com/halcyon/asdf-java.git
+    asdf plugin add java https://github.com/halcyon/asdf-java.git
     asdf install java openjdk-25.0.2
-    asdf global java openjdk-25.0.2
+    asdf set -u java openjdk-25.0.2
 
     ## Устанавливаем переменную окружения JAVA_HOME
     . ~/.asdf/plugins/java/set-java-home.bash
@@ -87,9 +87,9 @@ scoop install gradle
 
     ```bash
     ## Устанавливаем Gradle
-    asdf plugin-add gradle https://github.com/rfrancis/asdf-gradle.git
+    asdf plugin add gradle https://github.com/rfrancis/asdf-gradle.git
     asdf install gradle 9.7.0
-    asdf global gradle 9.7.0
+    asdf set -u gradle 9.7.0
     ```
 
 ## Используя пакеты с официального сайта
