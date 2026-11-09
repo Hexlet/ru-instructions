@@ -4,13 +4,13 @@ ClickHouse состоит из сервера, который хранит та�
 
 Перед тем как начать, убедитесь, что вы умеете запускать терминал и выполнять в нём команды.
 
-## Windows
+Установить ClickHouse можно двумя способами. С Docker сервер работает в отдельном контейнере и не меняет систему, без Docker сервер запускается из одного скачанного файла.
 
-ClickHouse не работает в Windows напрямую. Установите [Windows Subsystem for Linux](https://learn.microsoft.com/ru-ru/windows/wsl/install) (WSL), о настройке мы написали [гайд](https://ru.hexlet.io/blog/posts/ubuntu-linux-in-windows). Дальше команды выполняются в терминале Ubuntu по [инструкции для Linux](#linux) или через [Docker](#docker).
+В Windows ClickHouse напрямую не работает. Для варианта без Docker установите [Windows Subsystem for Linux](https://learn.microsoft.com/ru-ru/windows/wsl/install) (WSL), о настройке мы написали [гайд](https://ru.hexlet.io/blog/posts/ubuntu-linux-in-windows), и выполняйте команды в терминале Ubuntu.
 
-## Docker
+## С Docker
 
-Самый короткий путь подходит для любой системы, где установлен [Docker](/docker.md). Сервер запускается в отдельном контейнере `course-clickhouse` из официального образа с тегом `lts`, клиент входит в тот же образ. Это имя контейнера используется в командах курса ClickHouse на Хекслете.
+Этот вариант одинаково работает в Linux, macOS и Windows, если установлен [Docker](/docker.md). Сервер запускается в отдельном контейнере `course-clickhouse` из официального образа с тегом `lts`, клиент входит в тот же образ. Это имя контейнера используется в командах курса ClickHouse на Хекслете.
 
 ```bash
 docker run -d \
@@ -42,38 +42,9 @@ docker exec -it course-clickhouse clickhouse-client
 
 Контейнер сохраняет данные между остановками. Остановить его можно командой `docker stop course-clickhouse`, снова запустить командой `docker start course-clickhouse`.
 
-## Linux
+## Без Docker
 
-В Ubuntu и Debian ClickHouse ставится из официального репозитория пакетов. Сначала добавьте ключ и сам репозиторий.
-
-```bash
-sudo apt-get install -y apt-transport-https ca-certificates curl gnupg
-curl -fsSL 'https://packages.clickhouse.com/rpm/lts/repodata/repomd.xml.key' | sudo gpg --dearmor -o /usr/share/keyrings/clickhouse-keyring.gpg
-ARCH=$(dpkg --print-architecture)
-echo "deb [signed-by=/usr/share/keyrings/clickhouse-keyring.gpg arch=${ARCH}] https://packages.clickhouse.com/deb lts main" | sudo tee /etc/apt/sources.list.d/clickhouse.list
-sudo apt-get update
-```
-
-Затем установите сервер и клиент.
-
-```bash
-sudo apt-get install -y clickhouse-server clickhouse-client
-```
-
-Во время установки пакет спрашивает пароль пользователя `default`. Для учебного сервера на своём компьютере поле можно оставить пустым и нажать Enter. Если пароль задан, клиент запускается с флагом `--password` и запрашивает его.
-
-Запустите сервер и проверьте, что он отвечает.
-
-```bash
-sudo service clickhouse-server start
-clickhouse-client --query 'SELECT version()'
-```
-
-Интерактивный клиент открывается командой `clickhouse-client`. Сервер останавливается командой `sudo service clickhouse-server stop`.
-
-## macOS
-
-На macOS ClickHouse скачивается одним файлом скриптом с официального сайта.
+В Linux, macOS и WSL ClickHouse скачивается одним файлом скриптом с официального сайта. Создайте для него отдельный каталог.
 
 ```bash
 mkdir ~/clickhouse && cd ~/clickhouse
@@ -93,7 +64,7 @@ cd ~/clickhouse
 ./clickhouse client
 ```
 
-Остановить сервер можно сочетанием клавиш Ctrl+C в его терминале. Тот же способ работает и в Linux, если ставить пакеты не хочется.
+Остановить сервер можно сочетанием клавиш Ctrl+C в его терминале. При следующем запуске из этого каталога сервер подхватит сохранённые данные.
 
 ## Проверка установки
 
@@ -107,7 +78,7 @@ SELECT version();
 
 ## Если сервер не запускается
 
-Свежие версии ClickHouse на x86-64 используют инструкции процессора AVX2. На процессорах без них, например Intel до 2013 года, программа `clickhouse` завершается сразу после запуска. В терминале это выглядит как сообщение `Illegal instruction`, установка пакетов в Linux заканчивается ошибкой `dpkg: error processing package clickhouse-server`, а контейнер Docker останавливается с кодом 132 и пустым журналом.
+Свежие версии ClickHouse на x86-64 используют инструкции процессора AVX2. На процессорах без них, например Intel до 2013 года, программа `clickhouse` завершается сразу после запуска. Контейнер Docker в этом случае останавливается с кодом 132 и пустым журналом. Скрипт для варианта без Docker на таком процессоре скачивает вместо программы короткий файл с ошибкой доступа, и запуск `./clickhouse` выводит `syntax error near unexpected token`.
 
 Проверить процессор можно командой в Linux или WSL.
 
@@ -115,4 +86,4 @@ SELECT version();
 grep -c avx2 /proc/cpuinfo
 ```
 
-Если команда выводит `0`, инструкций AVX2 нет. В этом случае подойдёт более ранняя версия, например образ `clickhouse:25.3` в Docker. Он запускается той же командой, что и выше, с другим тегом в конце.
+Если команда выводит `0`, инструкций AVX2 нет. В этом случае подойдёт вариант с Docker и более ранней версией, образом `clickhouse:25.3`. Он запускается той же командой, что и выше, с другим тегом в конце.
