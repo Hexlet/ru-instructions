@@ -72,8 +72,8 @@ scoop install gradle
     ```bash
     ## Устанавливаем JDK
     asdf plugin add java https://github.com/halcyon/asdf-java.git
-    asdf install java openjdk-25.0.2
-    asdf set -u java openjdk-25.0.2
+    asdf install java temurin-25.0.5+8.0.LTS
+    asdf set -u java temurin-25.0.5+8.0.LTS
 
     ## Устанавливаем переменную окружения JAVA_HOME
     . ~/.asdf/plugins/java/set-java-home.bash
@@ -88,34 +88,34 @@ scoop install gradle
     ```bash
     ## Устанавливаем Gradle
     asdf plugin add gradle https://github.com/rfrancis/asdf-gradle.git
-    asdf install gradle 9.7.0
-    asdf set -u gradle 9.7.0
+    asdf install gradle 9.9.1
+    asdf set -u gradle 9.9.1
     ```
 
 ## Используя пакеты с официального сайта
 
 Последнюю версию JDK можно скачать [тут](https://adoptium.net/temurin/releases/?version=25). Выберите подходящий для Вашей операционной системы файл и скачайте его
 
-По ссылке загрузится архив. Скачайте архив и распакуйте его в директорию */usr/lib/jvm*. Затем установите значение для переменной окружения `$JAVA_HOME` */usr/lib/jvm/jdk-25.0.4* и добавьте путь */usr/lib/jvm/jdk-25.0.4* в переменную `$PATH`. Конкретные действия будут зависеть от оболочки, которую вы используете. Например, если у вас стоит Bash, то порядок действий будет следующий:
+По ссылке загрузится архив. Скачайте архив и распакуйте его в директорию */usr/lib/jvm*. Затем установите значение для переменной окружения `$JAVA_HOME` */usr/lib/jvm/jdk-25.0.5+8* и добавьте путь */usr/lib/jvm/jdk-25.0.5+8* в переменную `$PATH`. Конкретные действия будут зависеть от оболочки, которую вы используете. Например, если у вас стоит Bash, то порядок действий будет следующий:
 
 ```bash
 # Из директории, куда скачали архив
 mkdir /usr/lib/jvm
-tar -zxf OpenJDK25U-jdk_x64_linux_hotspot_25.0.4_7.tar.gz -C /usr/lib/jvm
+tar -zxf OpenJDK25U-jdk_x64_linux_hotspot_25.0.5_8.tar.gz -C /usr/lib/jvm
 ## Имя конечной директории может отличаться, в зависимости от версии
-echo 'export JAVA_HOME=/usr/lib/jvm/jdk-25.0.4' >> $HOME/.bashrc
-echo 'export PATH=$PATH:/usr/lib/jvm/jdk-25.0.4/bin' >> $HOME/.bashrc
+echo 'export JAVA_HOME=/usr/lib/jvm/jdk-25.0.5+8' >> $HOME/.bashrc
+echo 'export PATH=$PATH:/usr/lib/jvm/jdk-25.0.5+8/bin' >> $HOME/.bashrc
 source $HOME/.bashrc
 ```
 
 Если у вас стоит Zsh, то порядок действий будет тот же, но нужно заменить *.bashrc* на *.zshrc*.
 
-Последнюю версию сборщика пакетов Gradle можно скачать [тут](https://gradle.org/releases/). Порядок действий практически не отличается от установки JDK. Скачайте архив, распакуйте его в директорию */opt/gradle* и добавьте путь */opt/gradle/gradle-9.7.0/bin* в переменную окружения `$PATH`
+Последнюю версию сборщика пакетов Gradle можно скачать [тут](https://gradle.org/releases/). Порядок действий практически не отличается от установки JDK. Скачайте архив, распакуйте его в директорию */opt/gradle* и добавьте путь */opt/gradle/gradle-9.9.1/bin* в переменную окружения `$PATH`
 
 ```bash
 mkdir /opt/gradle
-unzip -d /opt/gradle gradle-9.7.0-bin.zip
-echo 'export PATH=$PATH:/opt/gradle/gradle-9.7.0/bin' >> $HOME/.bashrc
+unzip -d /opt/gradle gradle-9.9.1-bin.zip
+echo 'export PATH=$PATH:/opt/gradle/gradle-9.9.1/bin' >> $HOME/.bashrc
 source $HOME/.bashrc
 ```
 
@@ -126,13 +126,13 @@ source $HOME/.bashrc
 
 java --version
 
-openjdk 25.0.4 2026-07-21 LTS
-OpenJDK Runtime Environment Temurin-25.0.4+7 (build 25.0.4+7-LTS)
-OpenJDK 64-Bit Server VM Temurin-25.0.4+7 (build 25.0.4+7-LTS, mixed mode, sharing)
+openjdk 25.0.5 2026-10-20 LTS
+OpenJDK Runtime Environment Temurin-25.0.5+8 (build 25.0.5+8-LTS)
+OpenJDK 64-Bit Server VM Temurin-25.0.5+8 (build 25.0.5+8-LTS, mixed mode, sharing)
 
 gradle -v
 
 -------------------------------------------------------
-Gradle 9.7.0
+Gradle 9.9.1
 -------------------------------------------------------
 ```
