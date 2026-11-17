@@ -1,0 +1,64 @@
+name: Versions
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 7 * * 1"   # понедельник, 10:00 МСК
+  push:
+    branches: [main]
+    paths: ["*.md", ".github/versions.json", "scripts/check-versions.py"]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  versions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Сверить версии с endoflife.date
+        id: check
+        run: |
+          set +e
+          python3 scripts/check-versions.py . > report.md
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          cat report.md
+
+      - name: Обновить сводный issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXIT_CODE: ${{ steps.check.outputs.exit_code }}
+        run: |
+          set -euo pipefail
+
+          if [ "$EXIT_CODE" = "0" ]; then
+            title="Версии: всё актуально, проверено $(date +%d.%m.%Y)"
+          elif [ "$EXIT_CODE" = "1" ]; then
+            title="Версии: есть устаревшие, проверено $(date +%d.%m.%Y)"
+          else
+            title="Версии: проверка упала, проверено $(date +%d.%m.%Y)"
+          fi
+
+          {
+            cat report.md
+            echo
+            echo "---"
+            echo
+            echo "Правила лежат в \`.github/versions.json\`, отчёт перезаписывается каждым прогоном \`.github/workflows/versions.yml\`."
+            echo "Последний прогон: [$GITHUB_RUN_ID]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)."
+          } > body.md
+
+          gh label create version-check --color 1d76db --description "Сводка проверки версий" --force
+
+          number=$(gh issue list --label version-check --state all --limit 1 --json number --jq '.[0].number // empty')
+
+          if [ -z "$number" ]; then
+            gh issue create --title "$title" --label version-check --body-file body.md
+          else
+            gh issue edit "$number" --title "$title" --body-file body.md
+            if [ "$(gh issue view "$number" --json state --jq .state)" = "CLOSED" ] && [ "$EXIT_CODE" != "0" ]; then
+              gh issue reopen "$number"
+            fi
+          fi
