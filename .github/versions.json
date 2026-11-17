@@ -1,6 +1,6 @@
 [
   {"product": "postgresql", "patterns": ["postgresql@(\\d+)", "postgresql-(\\d+)\\b", "postgres:(\\d+)"]},
-  {"product": "ubuntu", "lts": true, "patterns": ["Ubuntu (\\d{2}\\.\\d{2})"]},
+  {"product": "ubuntu", "lts": true, "patterns": ["Ubuntu (\\d{2}\\.\\d{2})(?:(?: и |, )(\\d{2}\\.\\d{2}))?"]},
   {"product": "nodejs", "lts": true, "patterns": ["node@(\\d+)"]},
   {"product": "eclipse-temurin", "lts": true, "patterns": ["JDK ?(\\d{2})(?![\\d-])"]},
   {"product": "gradle", "patterns": ["Gradle (\\d+)\\.\\d+"]},

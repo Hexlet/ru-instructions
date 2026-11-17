@@ -12,6 +12,7 @@
 import json
 import re
 import sys
+import time
 import urllib.request
 from pathlib import Path
 
@@ -23,10 +24,16 @@ def key(version):
     return tuple(int(part) for part in version.split("."))
 
 
-def releases(product):
+def releases(product, attempts=3):
     request = urllib.request.Request(API.format(product), headers={"User-Agent": "ru-instructions-version-check"})
-    with urllib.request.urlopen(request, timeout=30) as response:
-        return json.load(response)["result"]["releases"]
+    for attempt in range(1, attempts + 1):
+        try:
+            with urllib.request.urlopen(request, timeout=30) as response:
+                return json.load(response)["result"]["releases"]
+        except OSError:
+            if attempt == attempts:
+                raise
+            time.sleep(5 * attempt)
 
 
 rules = json.loads((root / ".github/versions.json").read_text())
@@ -44,7 +51,8 @@ for rule in rules:
         for number, line in enumerate(file.read_text().splitlines(), 1):
             for pattern in rule["patterns"]:
                 for match in re.finditer(pattern, line):
-                    found.setdefault(match.group(1), number)
+                    for version in filter(None, match.groups()):
+                        found.setdefault(version, number)
         if not found:
             continue
         for version, number in sorted(found.items(), key=lambda item: key(item[0])):
