@@ -8,6 +8,11 @@ on:
     branches: [main]
     paths: ["*.md", ".github/versions.json", "scripts/check-versions.py"]
 
+# Два прогона подряд (пуш и слияние) иначе заводят по своему issue
+concurrency:
+  group: versions
+  cancel-in-progress: false
+
 permissions:
   contents: read
   issues: write
