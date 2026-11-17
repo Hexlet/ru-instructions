@@ -9,10 +9,10 @@
 ## Используя менеджер версий mise
 
 * Установите менеджер версий, например mise. Что это и как поставить — в гайде ["Что такое "Менеджер версий""](https://ru.hexlet.io/blog/posts/version-managers).
-* Установите актуальную версию Node.js (24+) и сделайте её глобальной:
+* Установите актуальную версию Node.js (26+) и сделайте её глобальной:
 
 ```bash
-mise use -g node@24
+mise use -g node@26
 ```
 
 ## Используя менеджер пакетов
@@ -22,24 +22,24 @@ mise use -g node@24
 ```bash
 curl --version
 # Неполный вывод
-curl 8.5.0
+curl 8.18.0
 ```
 
 Пользователи MacOS могут установить Node.js [по инструкции](https://nodejs.org/en/download) командой:
 
 ```bash
 # Download and install Node.js:
-brew install node@24
+brew install node
 # Verify the Node.js version:
-node -v # Should print "v24.11.0".
+node -v # Should print "v26.13.1".
 # Verify npm version:
-npm -v # Should print "11.6.1".
+npm -v # Should print "11.20.0".
 ```
 
 Пользователи Ubuntu могут установить Node.js из репозитория NodeSource:
 
 ```bash
-curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_26.x | sudo -E bash -
 sudo apt-get install -y nodejs
 ```
 
@@ -55,7 +55,7 @@ sudo apt-get install -y nodejs
 ```bash
 # Вывод может отличаться, главное чтобы не было ошибок
 node -v
-v24.x.x
+v26.x.x
 ```
 
 Если команда возвращает ошибку, то на Linux и MacOS, то стоит проверить, добавлен ли путь к Nodejs в переменную окружения `PATH`.

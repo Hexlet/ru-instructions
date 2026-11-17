@@ -1,18 +1,18 @@
 # Установка .NET
 
-Для разработки программ на C# потребуется _dotnet-sdk_. Рекомендуется ставить версию **.NET 6**, которая будет находится на длительной поддержке (LTS) почти до конца 2024 года. Если не используете пакетные менеджеры, то можно просто [скачать sdk с официального сайта](https://dotnet.microsoft.com/en-us/download). Если используете пакетные менеджеры, то см. инструкции ниже.
+Для разработки программ на C# потребуется _dotnet-sdk_. Рекомендуется ставить последнюю версию **.NET 11**, она поддерживается до ноября 2028 года. Если не используете пакетные менеджеры, то можно просто [скачать sdk с официального сайта](https://dotnet.microsoft.com/en-us/download). Если используете пакетные менеджеры, то см. инструкции ниже.
 
 ## Windows
 
 Убедитесь что установлен [пакетный менеджер Chocolatey](https://chocolatey.org/install). Откройте консоль с правами администратора и выполните команду:
 
 ```shell
-choco install dotnet-sdk -y
+choco install dotnet-11.0-sdk -y
 ```
 
-## MacOS
+## macOS
 
-Устанавливайте через [Homebrew](https://brew.sh/):
+Устанавливайте через [Homebrew](https://brew.sh/). Формула `dotnet-sdk` ставит последнюю версию .NET:
 
 ```shell
 brew install --cask dotnet-sdk
@@ -20,19 +20,18 @@ brew install --cask dotnet-sdk
 
 ## Linux (Ubuntu)
 
-Сперва нужно добавить ключи. Url отличается для разных версий Ubuntu. Например для версии 20.04, откройте терминал и выполните:
+В стандартном репозитории Ubuntu 24.04 и 26.04 пока лежит только .NET 10, а Microsoft для этих версий Ubuntu собственных пакетов не выпускает. .NET 11 ставится из репозитория backports, который ведёт Canonical:
 
 ```shell
-wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-sudo dpkg -i packages-microsoft-prod.deb
-rm packages-microsoft-prod.deb
+sudo add-apt-repository ppa:dotnet/backports
+sudo apt update
+sudo apt install -y dotnet-sdk-11.0
 ```
 
-Для других версий замените `20.04` в url на соответствующую версию. Установка самого dotnet-sdk:
+## Проверка
 
 ```shell
-sudo apt-get update; \
-  sudo apt-get install -y apt-transport-https && \
-  sudo apt-get update && \
-  sudo apt-get install -y dotnet-sdk-6.0
+# Вывод может отличаться, главное чтобы версия начиналась с 11
+dotnet --version
+11.0.100
 ```
