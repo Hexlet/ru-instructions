@@ -24,7 +24,14 @@ brew services start postgresql@18
 
 ### Ubuntu и WSL
 
-В стандартном репозитории Ubuntu 24.04 лежит PostgreSQL 16. Версия 18 ставится из официального репозитория проекта PostgreSQL, его подключает скрипт из пакета `postgresql-common`.
+В Ubuntu 26.04 PostgreSQL 18 лежит в стандартном репозитории.
+
+```bash
+sudo apt update
+sudo apt install postgresql
+```
+
+В Ubuntu 24.04 стандартный репозиторий даёт PostgreSQL 16. Версия 18 ставится из официального репозитория проекта PostgreSQL, его подключает скрипт из пакета `postgresql-common`. Версию Ubuntu показывает команда `lsb_release -a`.
 
 ```bash
 sudo apt update
