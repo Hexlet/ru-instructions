@@ -6,29 +6,41 @@
 
 ## Установка
 
-Установка PostgreSQL выполняется через терминал. Ниже даны команды для MacOS, Windows и Ubuntu:
+Установка PostgreSQL выполняется через терминал. Инструкция ставит PostgreSQL 18, последнюю стабильную версию. Команды для WSL совпадают с командами для Ubuntu.
+
+### macOS
+
+Homebrew держит каждую версию PostgreSQL в отдельной формуле, поэтому в имени пакета указывается версия.
 
 ```bash
-# Macos
-brew install postgresql
+brew install postgresql@18
 
-# Ubuntu
-sudo apt update
-sudo apt install postgresql
+# Формула с версией не кладёт psql и другие утилиты в PATH, это делает link
+brew link --force postgresql@18
 
-# Windows Subsystem for Linux (WSL)
-sudo apt install postgresql postgresql-contrib
+# Запускает PostgreSQL как службу, после перезагрузки она поднимется сама
+brew services start postgresql@18
 ```
 
-Сразу после установки PostgreSQL автоматически запускается от имени вновь созданного пользователя _postgres_ в большинстве операционных систем, за исключением Windows Subsystem for Linux (WSL). Пользователь _postgres_ понадобится нам дальше. Также будет создана база данных с именем _postgres_.
+### Ubuntu и WSL
+
+В стандартном репозитории Ubuntu 24.04 лежит PostgreSQL 16. Версия 18 ставится из официального репозитория проекта PostgreSQL, его подключает скрипт из пакета `postgresql-common`.
+
+```bash
+sudo apt update
+sudo apt install postgresql-common
+
+# Подключает репозиторий apt.postgresql.org
+sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y
+
+sudo apt install postgresql-18
+```
+
+Сразу после установки PostgreSQL запускается от имени вновь созданного пользователя _postgres_. Пользователь _postgres_ понадобится нам дальше. Также будет создана база данных с именем _postgres_.
 
 ## Запуск PostgreSQL на Windows (WSL)
 
-В начале для созданного пользователя _postgres_ потребуется задать пароль. Сделать это можно с помощью команды:
-
-```sudo passwd postgres```
-
-Кроме того, в отличие от Linux и MacOS, в Windows (WSL) PostgreSQL автоматически не запускается. Исправить это помогают следующие команды:
+В WSL служба PostgreSQL запускается сама, если в дистрибутиве включён systemd. В Ubuntu из Microsoft Store он включён по умолчанию. В старых установках WSL без systemd PostgreSQL придётся запускать вручную после каждого старта WSL. Управлять службой помогают следующие команды:
 
 ```bash
 # Проверяет текущее состояние базы данных, то есть показывает запущен ли PostgreSQL или нет
@@ -50,7 +62,7 @@ ps aux | grep postgres
 
 # Вывод может быть другим
 # Главное, чтобы в нем встречалась строчка с текстом bin/postgres
-postgres  3437  0.0  2.3 295008 24160 ?        S    12:01   0:00 /usr/lib/postgresql/9.5/bin/postgres -D /var/lib/postgresql/9.5/main -c config_file=/etc/postgresql/9.5/main/postgresql.conf
+postgres  5564  0.0  0.2 228700 34236 ?        Ss   12:01   0:00 /usr/lib/postgresql/18/bin/postgres -D /var/lib/postgresql/18/main -c config_file=/etc/postgresql/18/main/postgresql.conf
 ```
 
 В вашем случае вывод может отличаться, но главное — увидеть ту строчку, в которой отображается запуск самой базы данных. Если база данных запущена, то дальше нужно попробовать к ней подключиться. PostgreSQL поставляется со специальной программой _psql_, которая представляет собой интерактивную оболочку (REPL). Через него можно управлять PostgreSQL и выполнять запросы к базам данных прямо из терминала:
@@ -64,14 +76,14 @@ postgres  3437  0.0  2.3 295008 24160 ?        S    12:01   0:00 /usr/lib/postgr
 ```bash
 psql
 
-psql: FATAL:  role "tirion" does not exist
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  role "tirion" does not exist
 ```
 
 Эту проблему можно решить с помощью конструкции `sudo -u postgres psql`, которую используют в терминале при подключении PostgreSQL. Но это не лучшее решение, по таким причинам:
 
 * У пользователя _postgres_ есть максимальные права в СУБД. Если завладеть ими, можно все уничтожить. Поэтому приложения или пользователи никогда не создают базы данных от имени _postgres_ и никогда не работают из-под этого пользователя
 
-* Придется постоянно использовать эту конструкцию `sudo -u postgres` для любых команд, которые связаны с СУБД. Если у вас MacOS, часть `sudo -u postgres` использовать не нужно. После установки PostgreSQL автоматически конфигурируется для работы с вашим пользователем
+* Придется постоянно использовать эту конструкцию `sudo -u postgres` для любых команд, которые связаны с СУБД. Если у вас macOS, часть `sudo -u postgres` использовать не нужно. После установки PostgreSQL автоматически конфигурируется для работы с вашим пользователем
 
 ## Создание пользователя в СУБД
 
@@ -101,7 +113,7 @@ psql: FATAL:  role "tirion" does not exist
 ```bash
 psql
 
-psql: FATAL:  database "tirion" does not exist
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  database "tirion" does not exist
 ```
 
 Снова ошибка. Теперь `psql` «ругается», что не выбрана база данных. Невозможно соединиться с СУБД, если не указать конкретную базу данных. Ее можно указать самостоятельно — передать один аргумент в `psql`.
@@ -118,11 +130,11 @@ postgres=>
 
 ```bash
 postgres=> \du
-                                   List of roles
- Role name |                         Attributes                         | Member of
------------+------------------------------------------------------------+-----------
- postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
- tirion    | Create DB                                                  | {}
+                             List of roles
+ Role name |                         Attributes
+-----------+------------------------------------------------------------
+ postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS
+ tirion    | Create DB
 ```
 
 В СУБД создалось две роли: _postgres_ и которую самостоятельно добавили ранее. Теперь создадим базу данных.
@@ -149,14 +161,13 @@ createdb hexlet
 psql -l
 
 # Неполный вывод
-                          List of databases
-   Name    |  Owner   | Encoding |   Collate   |    Ctype    |
------------+----------+----------+-------------+-------------+
- pgadmin   | pgadmin  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
- tirion    | tirion   | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
- postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
- template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
- template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+                                List of databases
+   Name    |  Owner   | Encoding | Locale Provider |   Collate   |    Ctype    |
+-----------+----------+----------+-----------------+-------------+-------------+
+ hexlet    | tirion   | UTF8     | libc            | en_US.UTF-8 | en_US.UTF-8 |
+ postgres  | postgres | UTF8     | libc            | en_US.UTF-8 | en_US.UTF-8 |
+ template0 | postgres | UTF8     | libc            | en_US.UTF-8 | en_US.UTF-8 |
+ template1 | postgres | UTF8     | libc            | en_US.UTF-8 | en_US.UTF-8 |
 ```
 
 Теперь у нас есть роль и база данных для экспериментов. Подключимся к этой базе данных:
@@ -195,7 +206,7 @@ DETAIL:  There is 1 other session using the database.
 Команда `\?` загружает пейджер, по которому можно перемещаться, используя стандартные комбинации текстового редактора Vim:
 
 ```bash
-postgres=# \?
+postgres=> \?
 Informational
   (options: S = show system objects, + = additional detail)
   \d[S+]                 list tables, views, and sequences
@@ -223,12 +234,11 @@ Informational
 ```bash
 psql
 
-psql: could not connect to database template1: could not connect to server: No such file or directory
-  Is the server running locally and accepting
-  connections on Unix domain socket "/tmp/.s.PGSQL.5432"?
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
+        Is the server running locally and accepting connections on that socket?
 ```
 
-Этот вывод говорит, что подключение не удалось — нужно выяснять почему. В некоторых случаях такая ошибка возникает, если не запущен сервис _postgresql_. Тогда запустите его командой `sudo service postgresql start` и выполните подключение повторно.
+Этот вывод говорит, что подключение не удалось — нужно выяснять почему. В некоторых случаях такая ошибка возникает, если не запущен сервис _postgresql_. Тогда запустите его командой `sudo service postgresql start`, в macOS командой `brew services start postgresql@18`, и выполните подключение повторно.
 
 Еще вам может встретиться ошибка _psql: command not found_. Она указывает, что вы ввели не существующую команду. Это может пройти по трем причинам:
 
