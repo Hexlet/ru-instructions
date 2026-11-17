@@ -60,6 +60,59 @@ sudo service postgresql start
 sudo service postgresql stop
 ```
 
+## Вариант с Docker Compose
+
+Если на компьютере установлен [Docker](/docker.md), PostgreSQL можно запустить в контейнере. Такой сервер не меняет систему и одинаково работает в Linux, macOS и Windows. Создайте в каталоге проекта файл `compose.yaml` с конфигом из спойлера.
+
+<details>
+<summary>compose.yaml с PostgreSQL 18</summary>
+
+```yaml
+services:
+  postgres:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: hexlet
+      POSTGRES_PASSWORD: hexlet
+      POSTGRES_DB: hexlet
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hexlet -d hexlet"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
+```
+
+</details>
+
+Запустите сервер из каталога с файлом:
+
+```bash
+# Ключ --wait ждёт, пока pg_isready не подтвердит, что сервер принимает подключения
+docker compose up -d --wait
+```
+
+Клиент _psql_ входит в образ, поэтому подключиться можно без установки PostgreSQL на компьютер:
+
+```bash
+docker compose exec postgres psql -U hexlet
+
+hexlet=#
+```
+
+Приложения на компьютере подключаются по адресу `postgresql://hexlet:hexlet@localhost:5432/hexlet`. Если порт 5432 уже занят установленным PostgreSQL, замените в конфиге левое число, например на `"5433:5432"`, и подключайтесь к порту 5433.
+
+Роль _hexlet_ и одноимённая база создаются при первом запуске контейнера, поэтому разделы ниже про проверку установки, создание пользователя и базы нужны только для установки без Docker. Данные хранятся в томе `postgres-data` и сохраняются после `docker compose down`. Команда `docker compose down -v` удаляет том вместе со всеми базами.
+
+Начиная с PostgreSQL 18 официальный образ хранит данные в подкаталоге с номером версии, и том монтируется в `/var/lib/postgresql`. С путём `/var/lib/postgresql/data` из конфигов для старых версий контейнер сразу завершается с ошибкой `in 18+, these Docker images are configured to store database data in a format which is compatible with "pg_ctlcluster"`.
+
 ## Проверка правильности установки
 
 Теперь убедимся в том, что установка PostgreSQL прошла правильно. Посмотрим из командной строки, запущен ли PostgreSQL:
