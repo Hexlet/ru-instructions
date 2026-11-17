@@ -1,38 +1,36 @@
 # Установка .NET
 
-Для разработки программ на C# потребуется _dotnet-sdk_. Рекомендуется ставить версию **.NET 6**, которая будет находится на длительной поддержке (LTS) почти до конца 2024 года. Если не используете пакетные менеджеры, то можно просто [скачать sdk с официального сайта](https://dotnet.microsoft.com/en-us/download). Если используете пакетные менеджеры, то см. инструкции ниже.
+Для разработки программ на C# потребуется _dotnet-sdk_. Рекомендуется ставить версию **.NET 10**, она находится на длительной поддержке (LTS) до ноября 2028 года. Если не используете пакетные менеджеры, то можно просто [скачать sdk с официального сайта](https://dotnet.microsoft.com/en-us/download). Если используете пакетные менеджеры, то см. инструкции ниже.
 
 ## Windows
 
 Убедитесь что установлен [пакетный менеджер Chocolatey](https://chocolatey.org/install). Откройте консоль с правами администратора и выполните команду:
 
 ```shell
-choco install dotnet-sdk -y
+choco install dotnet-10.0-sdk -y
 ```
 
-## MacOS
+## macOS
 
-Устанавливайте через [Homebrew](https://brew.sh/):
+Устанавливайте через [Homebrew](https://brew.sh/). Формула без версии `dotnet-sdk` ставит самую свежую версию, она может оказаться без длительной поддержки, поэтому версия указывается явно:
 
 ```shell
-brew install --cask dotnet-sdk
+brew install --cask dotnet-sdk@10
 ```
 
 ## Linux (Ubuntu)
 
-Сперва нужно добавить ключи. Url отличается для разных версий Ubuntu. Например для версии 20.04, откройте терминал и выполните:
+В Ubuntu 24.04 и 26.04 пакет _dotnet-sdk_ лежит в стандартном репозитории, подключать репозиторий Microsoft не нужно:
 
 ```shell
-wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-sudo dpkg -i packages-microsoft-prod.deb
-rm packages-microsoft-prod.deb
+sudo apt update
+sudo apt install -y dotnet-sdk-10.0
 ```
 
-Для других версий замените `20.04` в url на соответствующую версию. Установка самого dotnet-sdk:
+## Проверка
 
 ```shell
-sudo apt-get update; \
-  sudo apt-get install -y apt-transport-https && \
-  sudo apt-get update && \
-  sudo apt-get install -y dotnet-sdk-6.0
+# Вывод может отличаться, главное чтобы версия начиналась с 10
+dotnet --version
+10.0.115
 ```
