@@ -4,14 +4,15 @@
 # интерактивной оболочке, которая подключает mise строкой из ~/.bashrc или ~/.zshrc.
 #
 # Строка TOOLS устроена как «что ставить | чем проверить». Каждая программа,
-# с которой начинается проверка, должна браться из каталога mise, иначе на
+# с которой начинается проверка, должна браться из каталога данных mise, иначе на
 # runner с предустановленными Java и Node.js проверка прошла бы без mise.
 # Оболочку задаёт CHECK_SHELL: bash на Linux, zsh на macOS.
 set -u
 
 : "${TOOLS:?переменная TOOLS не задана}"
 shell="${CHECK_SHELL:-bash}"
-installs="$HOME/.local/share/mise/installs/"
+# Почти всё лежит в installs/, а .NET mise ставит в dotnet-root/, поэтому сверяем весь каталог данных
+mise_data="$HOME/.local/share/mise/"
 
 # Интерактивная оболочка без терминала жалуется на управление заданиями, эти строки выкидываем
 in_shell() {
@@ -30,7 +31,7 @@ while IFS='|' read -r tools check; do
   script="set -e; $check"
   # shellcheck disable=SC2013 # нужны слова: имена программ
   for bin in $(grep -oE '(^|&& *)[a-z][a-z0-9-]*' <<<"$check" | sed 's/^&& *//'); do
-    script+="; case \$(command -v $bin) in $installs*) ;; *) echo \"$bin взят не из mise: \$(command -v $bin)\"; exit 1;; esac"
+    script+="; case \$(command -v $bin) in $mise_data*) ;; *) echo \"$bin взят не из mise: \$(command -v $bin)\"; exit 1;; esac"
   done
 
   echo "::group::$tools"
