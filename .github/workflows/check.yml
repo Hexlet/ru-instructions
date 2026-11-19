@@ -1,0 +1,32 @@
+name: Check
+
+# Обязательная проверка защиты main: без неё автослияние PR от Dependabot
+# не дожидается ничего и сливает сразу. Идёт на каждый PR без фильтра путей,
+# иначе PR без запуска проверки висел бы в ожидании.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # actionlint проверяет workflow, а встроенный в runner shellcheck их шаги run
+      - uses: raven-actions/actionlint@3d39aea434753780c3b3d4a1a31c854b4dbf49d7 # v2.2.0
+
+      - name: Shellcheck скриптов
+        run: shellcheck scripts/*.sh

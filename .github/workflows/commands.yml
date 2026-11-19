@@ -1,0 +1,152 @@
+name: Commands
+
+# Прогоняет команды mise из инструкций на Ubuntu и macOS. Команды повторены
+# здесь вручную: при правке версии в инструкции правится и TOOLS, а
+# scripts/check-versions.py читает этот файл наравне с *.md и напомнит
+# про устаревшую версию в обоих местах.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 7 1 * *"   # первое число месяца, 10:00 МСК
+  push:
+    branches: [main]
+    paths: ["*.md", ".github/workflows/commands.yml", "scripts/check-commands.sh"]
+  pull_request:
+    paths: ["*.md", ".github/workflows/commands.yml", "scripts/check-commands.sh"]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  # mise качает часть инструментов из релизов GitHub, без токена runner упирается в лимит API
+  GITHUB_TOKEN: ${{ github.token }}
+  MISE_HTTP_TIMEOUT: "120"
+  # Строка: что ставить | чем проверить. Команды те же, что в инструкциях
+  TOOLS: |
+    node@26 | node -v && npm -v
+    go@1.27 | go version
+    python@3.14 | python --version
+    java@temurin-25 gradle@9 | java --version && gradle -v && [[ $JAVA_HOME == $HOME/.local/share/mise/* ]]
+    ruby@4.0 | ruby -v
+    dotnet@11 | dotnet --version
+    uv@latest | uv --version
+    terraform@1.17 | terraform -version
+    kubectl@latest minikube@latest | kubectl version --client && minikube version
+    velero@latest | velero version --client-only
+
+jobs:
+  linux:
+    name: ubuntu ${{ matrix.ubuntu }}
+    strategy:
+      fail-fast: false
+      matrix:
+        ubuntu: ["22.04", "24.04", "26.04"]
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    # Голый образ показывает пакеты, которых нет в минимальной Ubuntu, runner их маскирует
+    container: ubuntu:${{ matrix.ubuntu }}
+    env:
+      CHECK_SHELL: bash
+      CHECK_LABEL: ${{ matrix.ubuntu }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # Пакеты из mise.md, nodejs.md и dotnet.md, sudo в контейнере нет
+      - name: Установить mise как в mise.md
+        run: |
+          apt-get update
+          apt-get install -y curl libatomic1 libicu-dev
+          curl -fsSL https://mise.run/bash | sh
+
+      - run: bash scripts/check-commands.sh
+
+  macos:
+    name: ${{ matrix.runner }} ${{ matrix.install }}
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [macos-latest, macos-26-intel]
+        install: [script]
+        include:
+          - runner: macos-latest
+            install: brew
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 40
+    env:
+      CHECK_SHELL: zsh
+      CHECK_LABEL: ${{ matrix.runner }} ${{ matrix.install }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Установить mise скриптом как в mise.md
+        if: matrix.install == 'script'
+        run: curl -fsSL https://mise.run/zsh | sh
+
+      - name: Установить mise через Homebrew как в mise.md
+        if: matrix.install == 'brew'
+        run: |
+          brew install mise
+          # shellcheck disable=SC2016 # строка пишется в ~/.zshrc как есть
+          echo 'eval "$(mise activate zsh)"' >> ~/.zshrc
+
+      - run: bash scripts/check-commands.sh
+
+  report:
+    needs: [linux, macos]
+    if: always() && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: read
+      issues: write
+    steps:
+      - name: Обновить сводный issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          set -euo pipefail
+
+          if [[ "$RESULTS" == *failure* || "$RESULTS" == *cancelled* ]]; then
+            failed=1
+            title="Команды: есть упавшие, проверено $(date +%d.%m.%Y)"
+          else
+            failed=0
+            title="Команды: всё ставится, проверено $(date +%d.%m.%Y)"
+          fi
+
+          {
+            echo "| Платформа | Результат |"
+            echo "| --- | --- |"
+            gh run view "$GITHUB_RUN_ID" --json jobs \
+              --jq '.jobs[] | select(.name != "report") | "| [\(.name)](\(.url)) | \(.conclusion) |"'
+            echo
+            echo "Какие инструменты упали, видно в сводке прогона и в логе платформы."
+            echo
+            echo "---"
+            echo
+            echo "Отчёт перезаписывается каждым прогоном \`.github/workflows/commands.yml\`."
+            echo "Последний прогон: [$GITHUB_RUN_ID]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)."
+          } > body.md
+
+          gh label create commands-check --color 5319e7 --description "Сводка проверки команд" --force
+
+          number=$(gh issue list --label commands-check --state all --limit 1 --json number --jq '.[0].number // empty')
+
+          if [ -z "$number" ]; then
+            gh issue create --title "$title" --label commands-check --body-file body.md
+          else
+            gh issue edit "$number" --title "$title" --body-file body.md
+            if [ "$(gh issue view "$number" --json state --jq .state)" = "CLOSED" ] && [ "$failed" = "1" ]; then
+              gh issue reopen "$number"
+            fi
+          fi
