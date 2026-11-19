@@ -14,6 +14,16 @@
 - [Kubernetes Basics (интерактивный туториал)](https://kubernetes.io/docs/tutorials/kubernetes-basics/)
 - [kubectl Cheatsheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
 
+## Установка через mise (рекомендованный для Linux и macOS)
+
+Установите mise по [инструкции](/mise.md), затем последние версии kubectl и minikube одной командой.
+
+```bash
+mise use -g kubectl@latest minikube@latest
+```
+
+Дальше переходите к разделу [Запуск кластера](#запуск-кластера). Разделы ниже описывают установку без mise.
+
 ## Установка kubectl
 
 ### macOS

@@ -16,15 +16,12 @@ python3 -V
 
 - Вы знакомы с основами Git
 
-## Используя менеджер версий (рекомендованный)
+## Используя менеджер версий mise (рекомендованный для Linux и macOS)
 
-- Установите менеджер версий asdf. О том, как это сделать, мы писали в гайде
-  ["Что такое "Менеджер версий""](https://ru.hexlet.io/blog/posts/version-managers/)
-- Выполните команды:
+Установите mise по [инструкции](/mise.md), затем Python 3.14, который станет версией по умолчанию. mise скачивает готовую сборку Python, поэтому компилятор и библиотеки для сборки ставить не нужно.
 
 ```bash
-asdf plugin add python https://github.com/asdf-community/asdf-python.git
-asdf install python latest
+mise use -g python@3.14
 ```
 
 ## Используя менеджер пакетов

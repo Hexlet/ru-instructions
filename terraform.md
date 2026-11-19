@@ -2,6 +2,15 @@
 
 Перед установкой понадобится VPN — без него не работает Terraform Cloud.
 
+## Менеджер версий mise (рекомендованный для Linux и macOS)
+
+Установите mise по [инструкции](/mise.md), затем Terraform 1.17, который станет версией по умолчанию.
+
+```bash
+mise use -g terraform@1.17
+terraform -version
+```
+
 ## Ubuntu
 
 Чтобы установить Terraform на Ubuntu, следуйте этим шагам:
@@ -51,18 +60,6 @@ sudo mv terraform /usr/local/bin/
 ```bash
 terraform -v
 ```
-
-## Менеджер версий asdf
-
-Установка:
-
-```bash
-asdf plugin add terraform https://github.com/asdf-community/asdf-hashicorp.git
-```
-Ссылка на [плагин](https://github.com/asdf-community/asdf-hashicorp)
-Использование:
-
-Посмотрите [asdf](https://asdf-vm.com/guide/getting-started.html) для получения инструкций о том, как устанавливать версии и управлять ими.
 
 ## Менеджер версий tenv
 

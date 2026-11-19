@@ -13,6 +13,16 @@
 
 ## Установка CLI
 
+### Через mise (рекомендованный для Linux и macOS)
+
+Установите mise по [инструкции](/mise.md), затем последнюю версию Velero.
+
+```bash
+mise use -g velero@latest
+```
+
+### Без менеджера версий
+
 <details><summary style="font-size:140%">Linux/macOS</summary>
 
 ```bash

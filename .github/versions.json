@@ -2,10 +2,12 @@
   {"product": "postgresql", "patterns": ["postgresql@(\\d+)", "postgresql-(\\d+)\\b", "postgres:(\\d+)"]},
   {"product": "ubuntu", "lts": true, "patterns": ["Ubuntu (\\d{2}\\.\\d{2})(?:(?: и |, )(\\d{2}\\.\\d{2}))?"]},
   {"product": "nodejs", "lts": true, "patterns": ["node@(\\d+)"]},
-  {"product": "eclipse-temurin", "lts": true, "patterns": ["JDK ?(\\d{2})(?![\\d-])"]},
-  {"product": "gradle", "patterns": ["Gradle (\\d+)\\.\\d+"]},
-  {"product": "go", "patterns": ["go(1\\.\\d+)"]},
-  {"product": "dotnet", "lts": true, "patterns": ["\\.NET (\\d+)\\b", "dotnet-sdk-(\\d+)\\.0"]},
-  {"product": "python", "latest": false, "patterns": ["[Pp]ython ?(3\\.\\d+)"]},
-  {"product": "apache-kafka", "patterns": ["kafka_2\\.13-(\\d+\\.\\d+)"]}
+  {"product": "eclipse-temurin", "lts": true, "patterns": ["JDK ?(\\d{2})(?![\\d-])", "temurin-(\\d{2})"]},
+  {"product": "gradle", "patterns": ["Gradle (\\d+)\\.\\d+", "gradle@(\\d+)"]},
+  {"product": "go", "patterns": ["go(1\\.\\d+)", "go@(1\\.\\d+)"]},
+  {"product": "dotnet", "lts": true, "patterns": ["\\.NET (\\d+)\\b", "dotnet-sdk-(\\d+)\\.0", "dotnet@(\\d+)"]},
+  {"product": "python", "latest": false, "patterns": ["[Pp]ython ?(3\\.\\d+)", "python@(3\\.\\d+)"]},
+  {"product": "apache-kafka", "patterns": ["kafka_2\\.13-(\\d+\\.\\d+)"]},
+  {"product": "ruby", "patterns": ["ruby@(\\d+\\.\\d+)"]},
+  {"product": "terraform", "patterns": ["terraform@(1\\.\\d+)"]}
 ]
