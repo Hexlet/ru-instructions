@@ -6,7 +6,7 @@ on:
     - cron: "0 7 * * 1"   # понедельник, 10:00 МСК
   push:
     branches: [main]
-    paths: ["*.md", ".github/versions.json", "scripts/check-versions.py"]
+    paths: ["*.md", ".github/versions.json", ".github/workflows/commands.yml", "scripts/check-versions.py"]
 
 # Два прогона подряд (пуш и слияние) иначе заводят по своему issue
 concurrency:
@@ -21,7 +21,7 @@ jobs:
   versions:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Сверить версии с endoflife.date
         id: check

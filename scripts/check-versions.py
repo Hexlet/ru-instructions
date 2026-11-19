@@ -1,7 +1,8 @@
 """Сверяет версии из инструкций с endoflife.date и печатает отчёт в markdown.
 
 Правила лежат в .github/versions.json. Для каждого продукта скрипт ищет версии
-по шаблонам во всех *.md корня и сообщает о трёх случаях:
+по шаблонам во всех *.md корня и в .github/workflows/commands.yml, где
+команды из инструкций повторены для CI, и сообщает о трёх случаях:
 - самая новая версия в файле ниже последней (только LTS, если "lts": true);
 - версия уже не поддерживается (isEol);
 - версии нет среди циклов продукта, то есть шаблон поймал лишнее.
@@ -37,7 +38,7 @@ def releases(product, attempts=3):
 
 
 rules = json.loads((root / ".github/versions.json").read_text())
-files = sorted(root.glob("*.md"))
+files = sorted(root.glob("*.md")) + [root / ".github/workflows/commands.yml"]
 findings = []
 
 for rule in rules:
@@ -55,8 +56,9 @@ for rule in rules:
                         found.setdefault(version, number)
         if not found:
             continue
+        name = file.relative_to(root).as_posix()
         for version, number in sorted(found.items(), key=lambda item: key(item[0])):
-            place = f"[{file.name}:{number}]({file.name}#L{number})"
+            place = f"[{name}:{number}]({name}#L{number})"
             if version not in cycles:
                 findings.append(f"| {place} | {product} | `{version}` | версии нет на endoflife.date, проверить шаблон |")
             elif cycles[version]["isEol"]:
@@ -65,7 +67,7 @@ for rule in rules:
         if rule.get("latest", True) and key(newest) < key(latest):
             number = found[newest]
             kind = "LTS " if rule.get("lts") else ""
-            findings.append(f"| [{file.name}:{number}]({file.name}#L{number}) | {product} | `{newest}` | вышла {kind}{latest} |")
+            findings.append(f"| [{name}:{number}]({name}#L{number}) | {product} | `{newest}` | вышла {kind}{latest} |")
 
 if findings:
     print("| Где | Продукт | Версия | Что не так |")
